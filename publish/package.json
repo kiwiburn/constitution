@@ -1,0 +1,18 @@
+{
+  "name": "@kiwiburn/publish-constitution",
+  "description": "Renders the Kiwiburn Constitution markdown as a styled PDF",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "publish": "node src/publish.ts",
+    "typecheck": "tsc --no-emit"
+  },
+  "dependencies": {
+    "md-to-pdf": "^5.2.5"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "typescript": "^7.0.2"
+  }
+}
