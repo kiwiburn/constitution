@@ -1,19 +1,59 @@
-@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Inter:wght@400;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap");
+/* Design borrowed from the Kiwiburn structure proposal (../structure/src/pages/proposal.astro) */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
 
 :root {
-  --accent: #d9531e;
-  --ink: #2b2620;
-  --muted: #8a7f73;
-  --rule: #e8dfd3;
-  --sand: #faf5ee;
+  --charcoal: #332d2d;
+  --heading: #ab0232;
+  --light: #e2e2e2;
+  --mid: #666666;
+  --orange: #ed7703;
+  --tint: #fff4e6;
+}
+
+@page {
+  margin: 20mm 22mm 18mm;
+  size: A4;
+
+  @top-left {
+    border-bottom: 1px solid var(--light);
+    color: var(--mid);
+    content: "KIWIBURN";
+    font: 700 7pt "Inter", Arial, sans-serif;
+    letter-spacing: 0.1em;
+    vertical-align: bottom;
+    padding-bottom: 6pt;
+  }
+
+  @top-right {
+    border-bottom: 1px solid var(--light);
+    color: var(--mid);
+    font: 400 7pt "Inter", Arial, sans-serif;
+    vertical-align: bottom;
+    padding-bottom: 6pt;
+  }
+
+  @bottom-center {
+    color: #888888;
+    content: counter(page);
+    font: 400 8pt "Inter", Arial, sans-serif;
+  }
+}
+
+/* Full-bleed cover, no running header or footer */
+@page :first {
+  margin: 0;
+
+  @top-left { content: none; }
+  @top-right { content: none; }
+  @bottom-center { content: none; }
 }
 
 html,
 body {
-  color: var(--ink);
-  font-family: "Source Serif 4", Georgia, serif;
-  font-size: 10.5pt;
-  line-height: 1.5;
+  color: var(--mid);
+  font-family: "Inter", Arial, sans-serif;
+  font-size: 10pt;
+  line-height: 1.65;
 }
 
 a {
@@ -21,44 +61,85 @@ a {
   text-decoration: none;
 }
 
-/* Cover page: the H1 and the draft line beneath it */
-h1 {
-  border-bottom: 4px solid var(--accent);
-  font-family: "Fraunces", Georgia, serif;
-  font-size: 44pt;
-  font-weight: 800;
-  line-height: 1.05;
-  margin: 70mm 0 6mm;
-  padding-bottom: 6mm;
+/* ── Cover ─────────────────────────────────────────── */
+.cover {
+  background: var(--charcoal);
+  break-after: page;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  height: 297mm;
+  padding: 25mm 28mm;
 }
 
-h1 + p {
-  break-after: page;
-  color: var(--muted);
-  font-family: "Inter", sans-serif;
-  font-size: 13pt;
-  letter-spacing: 0.04em;
+.cover__logo {
+  border-left: 4px solid var(--orange);
+  font-size: 16pt;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding-left: 10px;
   text-transform: uppercase;
 }
 
+.cover__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 12pt;
+  justify-content: center;
+}
+
+.cover__title {
+  font-size: 42pt;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.cover__subtitle {
+  color: var(--orange);
+  font-size: 18pt;
+  font-weight: 600;
+}
+
+.cover__footer {
+  align-items: flex-end;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  display: flex;
+  font-size: 9pt;
+  justify-content: space-between;
+  padding-top: 14pt;
+}
+
+.cover__tagline {
+  color: rgba(255, 255, 255, 0.55);
+  letter-spacing: 0.04em;
+}
+
+.cover__meta {
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 600;
+  text-align: right;
+}
+
+/* ── Interior ──────────────────────────────────────── */
 h2 {
+  border-left: 4px solid var(--orange);
   break-after: avoid;
   break-before: page;
-  color: var(--accent);
-  font-family: "Fraunces", Georgia, serif;
-  font-size: 22pt;
-  font-weight: 800;
-  margin: 0 0 6mm;
+  color: var(--heading);
+  font-size: 24pt;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0 0 14pt;
+  padding-left: 12pt;
 }
 
 h3 {
-  border-bottom: 1px solid var(--rule);
   break-after: avoid;
-  font-family: "Fraunces", Georgia, serif;
+  color: var(--heading);
   font-size: 13pt;
   font-weight: 600;
-  margin: 7mm 0 3mm;
-  padding-bottom: 1mm;
+  margin: 18pt 0 7pt;
 }
 
 p,
@@ -68,67 +149,77 @@ li {
 }
 
 p {
-  margin: 0 0 2.5mm;
+  margin: 0 0 7pt;
 }
 
 /* Clause paragraphs: hang the bold clause number in the left gutter */
 p:has(> strong:first-child) {
   break-inside: avoid;
-  padding-left: 15mm;
+  padding-left: 34pt;
   position: relative;
 }
 
 p > strong:first-child {
-  color: var(--accent);
-  font-family: "Inter", sans-serif;
+  color: var(--orange);
   font-size: 8.5pt;
-  font-weight: 600;
+  font-weight: 700;
   left: 0;
   position: absolute;
-  top: 0.2em;
+  top: 0.15em;
 }
 
 ul {
-  margin: 0 0 3mm 15mm;
-  padding-left: 5mm;
+  margin: 0 0 9pt 34pt;
+  padding-left: 14pt;
 }
 
 li {
-  margin-bottom: 1mm;
+  margin-bottom: 3pt;
 }
 
 li::marker {
-  color: var(--accent);
+  color: var(--orange);
 }
 
 /* Contents page */
 h2#contents + ul {
-  background: var(--sand);
-  border-left: 3px solid var(--accent);
   list-style: none;
-  margin: 0;
-  padding: 5mm 8mm;
+  margin: 14pt 0 0;
+  padding: 0;
 }
 
 h2#contents + ul li {
-  border-bottom: 1px dotted var(--rule);
-  font-family: "Inter", sans-serif;
-  font-size: 10pt;
+  border-bottom: 1px solid var(--light);
+  color: var(--heading);
+  font-size: 11pt;
+  font-weight: 600;
   margin: 0;
-  padding: 2mm 0;
+  padding: 7pt 0;
 }
 
 h2#contents + ul li:last-child {
   border-bottom: none;
 }
 
-/* Appendix: the Ten Principles */
+/* Appendix: the Ten Principles as callouts */
 h2[id^="appendix"] ~ h3 {
-  border-bottom: none;
-  color: var(--accent);
-  margin-top: 6mm;
+  background: var(--tint);
+  border-left: 4px solid var(--orange);
+  border-radius: 0 4px 0 0;
+  color: var(--charcoal);
+  font-size: 10pt;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  margin: 12pt 0 0;
+  padding: 8pt 14pt 2pt;
+  text-transform: uppercase;
 }
 
 h2[id^="appendix"] ~ p {
-  font-style: italic;
+  background: var(--tint);
+  border-left: 4px solid var(--orange);
+  border-radius: 0 0 4px 0;
+  break-before: avoid;
+  color: var(--charcoal);
+  padding: 2pt 14pt 10pt;
 }

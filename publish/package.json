@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "publish": "node src/publish.ts",
-    "typecheck": "tsc --no-emit"
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "md-to-pdf": "^5.2.5"
