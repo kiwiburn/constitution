@@ -1,0 +1,228 @@
+/* Design borrowed from the Kiwiburn structure proposal (../structure/src/pages/proposal.astro) */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
+
+:root {
+  --charcoal: #332d2d;
+  --heading: #ab0232;
+  --light: #e2e2e2;
+  --mid: #666666;
+  --orange: #ed7703;
+  --orange-text: #b85a00;
+  --tint: #fff4e6;
+}
+
+@page {
+  margin: 20mm 22mm 18mm;
+  size: A4;
+
+  @top-left {
+    border-bottom: 1px solid var(--light);
+    color: var(--mid);
+    content: "KIWIBURN";
+    font: 700 7pt "Inter", Arial, sans-serif;
+    letter-spacing: 0.1em;
+    vertical-align: bottom;
+    padding-bottom: 6pt;
+  }
+
+  @top-right {
+    border-bottom: 1px solid var(--light);
+    color: var(--mid);
+    font: 400 7pt "Inter", Arial, sans-serif;
+    vertical-align: bottom;
+    padding-bottom: 6pt;
+  }
+
+  @bottom-center {
+    color: #888888;
+    content: counter(page);
+    font: 400 8pt "Inter", Arial, sans-serif;
+  }
+}
+
+/* Full-bleed cover, no running header or footer */
+@page :first {
+  margin: 0;
+
+  @top-left { content: none; }
+  @top-right { content: none; }
+  @bottom-center { content: none; }
+}
+
+html,
+body {
+  color: var(--charcoal);
+  font-family: "Inter", Arial, sans-serif;
+  font-size: 10pt;
+  line-height: 1.65;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ── Cover ─────────────────────────────────────────── */
+/* body > beats md-to-pdf's `body > :first-child { padding-top: 0 }` */
+body > .cover {
+  background: var(--charcoal);
+  break-after: page;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  height: 297mm;
+  padding: 25mm 28mm;
+}
+
+.cover__logo {
+  border-left: 4px solid var(--orange);
+  font-size: 16pt;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding-left: 10px;
+  text-transform: uppercase;
+}
+
+.cover__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 12pt;
+  justify-content: center;
+}
+
+.cover__title {
+  font-size: 42pt;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.cover__subtitle {
+  color: var(--orange);
+  font-size: 18pt;
+  font-weight: 600;
+}
+
+.cover__footer {
+  align-items: flex-end;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  display: flex;
+  font-size: 9pt;
+  justify-content: space-between;
+  padding-top: 14pt;
+}
+
+.cover__tagline {
+  color: rgba(255, 255, 255, 0.55);
+  letter-spacing: 0.04em;
+}
+
+.cover__meta {
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 600;
+  text-align: right;
+}
+
+/* ── Interior ──────────────────────────────────────── */
+h2 {
+  border-left: 4px solid var(--orange);
+  break-after: avoid;
+  break-before: page;
+  color: var(--heading);
+  font-size: 24pt;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0 0 14pt;
+  padding: 0 0 0 12pt;
+}
+
+h3 {
+  break-after: avoid;
+  color: var(--heading);
+  font-size: 13pt;
+  font-weight: 600;
+  margin: 18pt 0 7pt;
+  padding: 0;
+}
+
+p,
+li {
+  orphans: 3;
+  widows: 3;
+}
+
+p {
+  margin: 0 0 7pt;
+}
+
+/* Clause paragraphs: hang the bold clause number in the left gutter */
+p:has(> strong:first-child) {
+  break-inside: avoid;
+  padding-left: 34pt;
+  position: relative;
+}
+
+p > strong:first-child {
+  color: var(--orange-text);
+  font-size: 8.5pt;
+  font-weight: 700;
+  left: 0;
+  position: absolute;
+  top: 0.15em;
+}
+
+ul {
+  margin: 0 0 9pt 34pt;
+  padding-left: 14pt;
+}
+
+li {
+  margin-bottom: 3pt;
+}
+
+li::marker {
+  color: var(--orange);
+}
+
+/* Contents page */
+h2#contents + ul {
+  list-style: none;
+  margin: 14pt 0 0;
+  padding: 0;
+}
+
+h2#contents + ul li {
+  border-bottom: 1px solid var(--light);
+  color: var(--heading);
+  font-size: 11pt;
+  font-weight: 600;
+  margin: 0;
+  padding: 7pt 0;
+}
+
+h2#contents + ul li:last-child {
+  border-bottom: none;
+}
+
+/* Appendix: the Ten Principles as callouts */
+h2[id^="appendix"] ~ h3 {
+  background: var(--tint);
+  border-left: 4px solid var(--orange);
+  border-radius: 0 4px 0 0;
+  color: var(--charcoal);
+  font-size: 10pt;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  margin: 12pt 0 0;
+  padding: 8pt 14pt 2pt;
+  text-transform: uppercase;
+}
+
+h2[id^="appendix"] ~ p {
+  background: var(--tint);
+  border-left: 4px solid var(--orange);
+  border-radius: 0 0 4px 0;
+  break-before: avoid;
+  color: var(--charcoal);
+  padding: 2pt 14pt 10pt;
+}
