@@ -7,6 +7,7 @@
   --light: #e2e2e2;
   --mid: #666666;
   --orange: #ed7703;
+  --orange-text: #b85a00;
   --tint: #fff4e6;
 }
 
@@ -50,7 +51,7 @@
 
 html,
 body {
-  color: var(--mid);
+  color: var(--charcoal);
   font-family: "Inter", Arial, sans-serif;
   font-size: 10pt;
   line-height: 1.65;
@@ -62,7 +63,8 @@ a {
 }
 
 /* ── Cover ─────────────────────────────────────────── */
-.cover {
+/* body > beats md-to-pdf's `body > :first-child { padding-top: 0 }` */
+body > .cover {
   background: var(--charcoal);
   break-after: page;
   color: #ffffff;
@@ -131,7 +133,7 @@ h2 {
   font-weight: 700;
   line-height: 1.2;
   margin: 0 0 14pt;
-  padding-left: 12pt;
+  padding: 0 0 0 12pt;
 }
 
 h3 {
@@ -140,6 +142,7 @@ h3 {
   font-size: 13pt;
   font-weight: 600;
   margin: 18pt 0 7pt;
+  padding: 0;
 }
 
 p,
@@ -160,7 +163,7 @@ p:has(> strong:first-child) {
 }
 
 p > strong:first-child {
-  color: var(--orange);
+  color: var(--orange-text);
   font-size: 8.5pt;
   font-weight: 700;
   left: 0;
